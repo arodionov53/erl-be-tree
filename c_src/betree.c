@@ -943,12 +943,15 @@ cleanup:
     /*return retval;*/
 /*}*/
 
+// #define BE_DIRTY 0
+#define BE_DIRTY ERL_NIF_DIRTY_JOB_CPU_BOUND
+
 static ErlNifFunc nif_functions[] = {
-    {"betree_make", 1, nif_betree_make, 0},
-    {"betree_make_sub", 4, nif_betree_make_sub, 0},
-    {"betree_insert_sub", 2, nif_betree_insert_sub, 0},
-    {"betree_exists", 2, nif_betree_exists, 0},
-    {"betree_search", 2, nif_betree_search, 0}
+    {"betree_make", 1, nif_betree_make, BE_DIRTY},
+    {"betree_make_sub", 4, nif_betree_make_sub, BE_DIRTY},
+    {"betree_insert_sub", 2, nif_betree_insert_sub, BE_DIRTY},
+    {"betree_exists", 2, nif_betree_exists, BE_DIRTY},
+    {"betree_search", 2, nif_betree_search, BE_DIRTY}
     /*{"betree_delete", 2, nif_betree_delete, 0}*/
 };
 
