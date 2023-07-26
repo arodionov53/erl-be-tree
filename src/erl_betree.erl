@@ -5,7 +5,8 @@
     betree_make_sub/4,
     betree_insert_sub/2,
     betree_exists/2,
-    betree_search/2
+    betree_search/2,
+    betree_write_dot_file/1
 ]).
 
 betree_make(Domains) ->
@@ -18,4 +19,5 @@ betree_exists(Betree, Event) ->
     erl_betree_nif:betree_exists(Betree, Event).
 betree_search(Betree, Event) ->
     erl_betree_nif:betree_search(Betree, Event).
-
+betree_write_dot_file(Betree) ->
+    erl_betree_nif:betree_write_dot_file(Betree).

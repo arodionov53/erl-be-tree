@@ -8,7 +8,8 @@
     betree_make_sub/4,
     betree_insert_sub/2,
     betree_exists/2,
-    betree_search/2
+    betree_search/2,
+    betree_write_dot_file/1
 ]).
 
 -spec on_load() -> ok.
@@ -43,3 +44,5 @@ betree_exists(_Betree, _Event) ->
 betree_search(_Betree, _Event) ->
     ?nif_stub.
 
+betree_write_dot_file(_Betree) ->
+    ?nif_stub.

@@ -5,6 +5,7 @@
 #include "erl_nif.h"
 
 #include "betree.h"
+#include "debug.h"
 
 // return values
 static ERL_NIF_TERM atom_ok;
@@ -943,12 +944,36 @@ cleanup:
     /*return retval;*/
 /*}*/
 
+static ERL_NIF_TERM nif_write_dot_file(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+{
+    ERL_NIF_TERM retval;
+    if(argc != 1) {
+        retval = enif_make_badarg(env);
+        goto cleanup;
+    }
+
+    struct betree* betree = get_betree(env, argv[0]);
+    if(betree == NULL) {
+        retval = enif_make_badarg(env);
+        goto cleanup;
+    }
+
+    write_dot_file(betree);
+    retval = atom_ok;
+
+cleanup:
+    return retval;
+
+}
+
+
 static ErlNifFunc nif_functions[] = {
     {"betree_make", 1, nif_betree_make, 0},
     {"betree_make_sub", 4, nif_betree_make_sub, 0},
     {"betree_insert_sub", 2, nif_betree_insert_sub, 0},
     {"betree_exists", 2, nif_betree_exists, 0},
-    {"betree_search", 2, nif_betree_search, 0}
+    {"betree_search", 2, nif_betree_search, 0},
+    {"betree_write_dot_file", 1, nif_write_dot_file, 0}
     /*{"betree_delete", 2, nif_betree_delete, 0}*/
 };
 
